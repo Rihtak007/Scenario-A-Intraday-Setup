@@ -3,8 +3,11 @@ def is_pivot_breakout(df):
         return False
     prev = df.iloc[-2]
     pivot = (prev['high'] + prev['low'] + prev['close']) / 3
-    today_high = df.iloc[-1]['high']
-    return today_high > pivot
+
+    # Use the current day high explicitly, not the full column
+    today_high = df['high'].iloc[-1]
+
+    return bool(today_high > pivot)
 
 def check_volume_surge(df, factor=1.5):
     if len(df) < 11:
