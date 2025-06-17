@@ -4,7 +4,7 @@ def is_pivot_breakout(df):
             return False
         prev = df.iloc[-2]
         pivot = (prev['high'] + prev['low'] + prev['close']) / 3
-        today_high = float(df.iloc[-1]['high'])
+        today_high = float(df['high'].iloc[-1])
         return bool(today_high > pivot)
     except Exception as e:
         print("❌ Error in is_pivot_breakout:", e)
