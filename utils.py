@@ -16,9 +16,13 @@ def check_volume_surge(df, factor=1.5):
     return df.iloc[-1]['volume'] > avg_vol * factor
 
 def check_momentum(df):
+    if 'close' not in df or len(df) < 15:
+        return False
     delta = df['close'].diff()
-    gain = delta.where(delta > 0, 0).rolling(14).mean()
-    loss = -delta.where(delta < 0, 0).rolling(14).mean()
+    gain = delta.where(delta > 0, 0).rolling(window=14).mean()
+    loss = -delta.where(delta < 0, 0).rolling(window=14).mean()
     rs = gain / loss
     rsi = 100 - (100 / (1 + rs))
-    return rsi.iloc[-1] > 60
+    latest_rsi = rsi.iloc[-1]
+    return latest_rsi > 60
+
