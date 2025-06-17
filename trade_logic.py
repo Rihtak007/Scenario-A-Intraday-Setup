@@ -1,13 +1,9 @@
-import pandas as pd
-import yfinance as yf
-from utils import is_pivot_breakout, check_volume_surge, check_momentum
-from datetime import datetime
-
 from datetime import datetime
 
 def get_trade_signal():
     now = datetime.now()
-    return f"""📈 *Scenario A Breakout Trade [Test]*
+    print("🔥 TEST get_trade_signal() called at", now)
+    return f"""📈 *Test Breakout Trade*
 Stock: TESTSTOCK
 Entry: ₹123.45
 Target: ₹126.90
